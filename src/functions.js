@@ -2,10 +2,10 @@ import { Parser } from 'xml2js';
 const parser = new Parser(/* options */);
 const localAddress = "http://127.0.0.1:8007/api/"
 
-const userAPI = 'http://127.0.0.1:8007/api/users/';
-const mapAPI = 'http://127.0.0.1:8007/api/maps/';
-const gameAPI = 'http://127.0.0.1:8007/api/games/';
-const blogAPI = 'http://127.0.0.1:8007/api/blogs/';
+const userAPI = 'http://127.0.0.1:8007/api/user/';
+const mapAPI = 'http://127.0.0.1:8007/api/map/';
+const gameAPI = 'http://127.0.0.1:8007/api/game/';
+const blogAPI = 'http://127.0.0.1:8007/api/blog/';
 
 
 async function createUser(username, password) {
@@ -36,5 +36,6 @@ async function addBlog(title, content, creatorID) {
     }
 }
 
+export default {createUser, addBlog};
 
 
