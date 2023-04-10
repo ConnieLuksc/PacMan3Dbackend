@@ -1,11 +1,19 @@
 import { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema({
-    userId: string, // User ID provided by the user
+    userId: { type: String}, // User ID provided by the user
     username: { type: String, required: true, unique: true }, // Username provided by the user
     password: { type: String, required: true }, // Password provided by the user
-    highestScore: number // Highest score achieved in the game    
+    highestScore: { type: Number }// Highest score achieved in the game    
 })
+const User = model('User', UserSchema);
+// const user1 = new User({
+//     userId: '123456',
+//     username: 'user1',
+//     password: 'password1',
+//     highestScore: 100
+// });
+// user1.save();
 
 const GameSchema = new Schema({
     userId: { type: String, required: true }, // User ID of the player
@@ -29,7 +37,7 @@ const BlogSchema = new Schema({
 });
 
 const Map = model('Map', MapSchema);
-const User = model('User', UserSchema);
+
 const Game = model('Game', GameSchema);
 const Blog = model('Blog', BlogSchema);
 
