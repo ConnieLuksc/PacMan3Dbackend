@@ -1,4 +1,8 @@
 import express from 'express';
-const GameRouter = express.Router();
-// Define routes and middleware for GameRouter
+import { Router } from 'express';
+const GameRouter = new Router();
+import db from "../mongodb_connection.js"
+
+
 export default GameRouter;
+

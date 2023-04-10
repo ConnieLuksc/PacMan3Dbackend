@@ -1,49 +1,75 @@
 import express from 'express';
 import { Router } from 'express';
 const UserRouter = new Router();
-// Define routes and middleware for UserRouter
-import { createHash } from 'node:crypto'
 import db from "../mongodb_connection.js"
 
 
-//Function: createUser
-UserRouter.post('/user', async (req, res) => {
-    try {
-        let username = req.body.username;
-        let password = req.body.password;
-        let hashed_password = createHash('sha3-256').update(password).digest('hex');
-        const userExisted = await db.collection("users").findOne({ username: username });
-
-        if (userExisted != null) {
-            res.send({ isCreated: false, error_message: "User already exists"});
-        } else {
-            const result = await db.collection("users").insertOne({ username: username, password: hashed_password });
-            if (!result) {
-                res.send({ isCreated: false, error_message: "Failed to create user"});
-            } else {
-                res.send({ isCreated: true });
-            }
-        }
-    } catch (error) {
-        console.error("An error occurred:", error);
-        res.status(500).send({ isCreated: false, error_message: "Internal server error"});
+UserRouter.post('/signup', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const email = req.body.email;
+    const userExisted = await db.collection("users").findOne({ username: username });
+    if (userExisted != null) {
+        res.send({ isCreated: false, error_message: "User already exists"});
+    } else {
+        const result = await db.collection("users").insertOne({ username: username, password: password, email: email });
+        if (!result) res.send({ isCreated: false, error_message: "Failed to sign up"});
+        else res.send({ isCreated: true });
     }
 });
 
-//Function: retrieveUser
-UserRouter.get('/user/:username', async (req, res) => {
-    let username = req.params.username
+UserRouter.post('/login', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const result = await db.collection("users").findOne({username : username, password: password})
+    if (!result) res.send({ isLogin: false })
+    else res.send({isLogin: true })
+})
+
+
+UserRouter.get('/:username', async (req, res) => {
+    const username = req.params.username
     const result = await db.collection("users").findOne({"username" : username})
     if (!result) res.send(null)
     else res.send(result)
 })
 
-//Function: deleteUser
-UserRouter.delete("/user/:username", async (req, res) => {
+UserRouter.delete("/:username", async (req, res) => {
     const username = req.params.username
     const result = await db.collection("users").deleteOne({ "username": username })
-    if (!result) res.send({isDeleted: false})
+    if (!result) res.send({isDeleted: false, error_message: "Failed to delete user"})
     else res.send({isDeleted: true})
 })
+
+UserRouter.post('/reset', async (req, res) => {
+    const oldPassword = req.body.oldPassword;
+    const newPassword = req.body.newPassword;
+    const username = req.body.username;
+    // Check if user exists in the database
+    const user = await db.collection("users").findOne({ username: username });
+    if (user == null) {
+        res.send({ isReset: false, error_message: "User not found" });
+    } else {
+        // Verify old password against database record
+        if (oldPassword === user.password) {
+            // Update password in the database
+            const result = await db.collection("users").updateOne({ username: username }, { $set: { password: newPassword } });
+            if (!result) {
+                res.send({ isReset: false, error_message: "Failed to reset password" });
+            } else {
+                res.send({ isReset: true });
+            }
+        } else {
+            res.send({ isReset: false, error_message: "Old password does not match" });
+        }
+    }
+});
+
+
+
+
+
+
+
 
 export default UserRouter;

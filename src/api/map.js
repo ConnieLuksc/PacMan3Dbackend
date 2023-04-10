@@ -1,4 +1,7 @@
 import express from 'express';
-const MapRouter = express.Router();
-// Define routes and middleware for MapRouter
+import { Router } from 'express';
+const MapRouter = new Router();
+import db from "../mongodb_connection.js"
+
+
 export default MapRouter;
