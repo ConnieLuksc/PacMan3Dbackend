@@ -38,8 +38,8 @@ app.listen(3000,'127.0.0.1')
 
 
 // await helper.createUser("a1", "password").then(res => console.log(res))
-await helper.deleteUser("user1").then(res => res.json()).then(res => console.log(res))
-//await helper.retrieveUser("user1").then(res => console.log(res))
+// await helper.deleteUser("user1").then(res => res.json()).then(res => console.log(res))
+// await helper.retrieveUser("user1").then(res => console.log(res))
 
 
 
