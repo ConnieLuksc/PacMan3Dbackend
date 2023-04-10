@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true }, // Password provided by the user
     email: { type: String, required: true, unique: true }, // Email provided by the user
     highestScore: { type: Number }, // Highest score achieved in the game
-    blogs: [{ type: Schema.Types.ObjectId, ref: 'Blog' }] // List of blogs created by the user
+    // blogs: [{ type: Schema.Types.ObjectId, ref: 'Blog' }] 
 });
 
 const BlogSchema = new Schema({

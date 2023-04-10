@@ -66,10 +66,4 @@ UserRouter.post('/reset', async (req, res) => {
 });
 
 
-
-
-
-
-
-
 export default UserRouter;

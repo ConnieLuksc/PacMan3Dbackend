@@ -35,11 +35,15 @@ app.get('/', (req,res) => {
 
 app.listen(3000,'127.0.0.1')
 
-
-
-// await helper.createUser("a1", "password").then(res => console.log(res))
-// await helper.deleteUser("user1").then(res => res.json()).then(res => console.log(res))
+// await helper.signUp("a1","a1@gmail.com", "password").then(res => console.log(res))
+// await helper.reset("a1","password", "password1").then(res => console.log(res))
 // await helper.retrieveUser("user1").then(res => console.log(res))
+// await helper.deleteUser("a1").then(res => console.log(res))
+
+// await helper.addBlog("CSCI3100.2","pacman3D project.2", "Grp1").then(res => console.log(res))
+// await helper.getBlogByUser("Grp1").then(res => console.log(res))
+// await helper.deleteBlog("643402e26581fc9abecc0c25").then(res => console.log(res))
+// await helper.likeBlog("643408ade1651e47415a1757").then(res => console.log(res))
 
 
 
