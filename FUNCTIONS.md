@@ -3,37 +3,37 @@
 ## User
 
 1. signUp(username, email, password)
-Input: username (string), email (string), password (string)
-Output: isCreated 
+<br>Input: username (string), email (string), password (string)
+<br>Output: isCreated 
 
 2. login(email, password)
-Input: email (string), password (string)
-Output: isLogin
+<br>Input: email (string), password (string)
+<br>Output: isLogin
 
 3. reset(username, oldPassword, newPassword)
-Input: username (string), oldPassword (string), newPassword (string)
-Output: isReset
+<br>Input: username (string), oldPassword (string), newPassword (string)
+<br>Output: isReset
 
 4. retrieveUser(username)
-Input: username (string)
+<br>Input: username (string)
 
 5. deleteUser(username)
-Input: username (string)
-Output: isDeleted
+<br>Input: username (string)
+<br>Output: isDeleted
 
 ## Blog
 1. addBlog(title, content, creatorId)
-Input: title (string), content (string), creatorId (string)
-Output: isAdded
+<br>Input: title (string), content (string), creatorId (string)
+<br>Output: isAdded
 
 2. getBlogByUser(creatorId)
-Input: creatorId (string)
-Output: [{title, content, creatorId, createdAt}]
+<br>Input: creatorId (string)
+<br>Output: [{title, content, creatorId, createdAt}]
 
 3. deleteBlog(blogId)
-Input: blogId (string)
-Output: isDeleted
+<br>Input: blogId (string)
+<br>Output: isDeleted
 
 4. likeBlog(blogId)
-Input: blogId (string)
-Output: isLiked
+<br>Input: blogId (string)
+<br>Output: isLiked
