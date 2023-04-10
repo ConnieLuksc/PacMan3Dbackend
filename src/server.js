@@ -1,45 +1,47 @@
 import express from 'express'
 import mongoose from 'mongoose'
 
-const app = express();
 import UserRouter from './api/user.js'
 import MapRouter from './api/map.js'
 import GameRouter from './api/game.js'
 import BlogRouter from './api/blog.js'
 import helper from "./functions.js"
-import schemas from './schema.js'
+import schema from './schema.js'
 
+import db from "./mongodb_connection.js"
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
+// const url = "mongodb://localhost:27017/pacman"
+// const port = 3000;
+const app = express();
+// const db = mongoose.connection;
+// mongoose.connect(url, {})
+//     .then(result => console.log("database connected"))
+//     .catch(err => console.log(err))
 
-mongoose.connect('mongodb+srv://Pacman:1234@pacman.ggmpckr.mongodb.net/?retryWrites=true&w=majority');
-const db = mongoose.connection;
-db.once('open', () => {
-    console.log('DB connection successful');
-    app.use(bodyParser.json({limit: '50mb'}))
-    app.use(bodyParser.urlencoded({extended: false}))
-    app.use(cors({orogin: '*'}))
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(cors({orogin: '*'}))
 
-    mongoose.model('User', schemas.UserSchema);
-    mongoose.model('Game', schemas.GameSchema);
-    mongoose.model('Map', schemas.MapSchema);
-    mongoose.model('Blog', schemas.BlogSchema);
+app.use('/api/user', UserRouter)
+app.use('/api/map', MapRouter)
+app.use('/api/game', GameRouter)
+app.use('/api/blog', BlogRouter)
 
-    app.use('/api/user', UserRouter)
-    app.use('/api/map', MapRouter)
-    app.use('/api/game', GameRouter)
-    app.use('/api/blog', BlogRouter)
-});
+app.get('/', (req,res) => {
+    res.send("<h1>hello from node js app</h1>")
+})
 
-
-// start the server
-app.listen(3000);
-
-await helper.createUser("a1", "password").then(res => console.log(res))
+app.listen(3000,'127.0.0.1')
 
 
-export default db
+
+// await helper.createUser("a1", "password").then(res => console.log(res))
+await helper.deleteUser("user1").then(res => res.json()).then(res => console.log(res))
+//await helper.retrieveUser("user1").then(res => console.log(res))
+
+
 
 
 
