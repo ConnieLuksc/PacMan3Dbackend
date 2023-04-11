@@ -175,7 +175,77 @@ async function likeBlog(blogId) {
     }
 }
     
+async function saveMap(id, creatorID, name, mapSize, mapCells) {
+    try {
+      const url = mapAPI + "save";
+      const body = {
+        id: id,
+        creatorID: creatorID,
+        name: name,
+        mapSize: mapSize,
+        mapCells: mapCells
+      };
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      };
+      const response = await fetch(url, options);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw new Error('Failed to fetch data from the API');
+    }
+  }
 
-export default {signUp, login, reset, deleteUser, addBlog, retrieveUser, getBlogByUser, deleteBlog, likeBlog};
+  async function getMapById(mapId) {
+    try {
+      const url = mapAPI + `get/${mapId}`;
+      const options = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      const response = await fetch(url, options);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw new Error('Failed to fetch data from the API');
+    }
+  }
+
+  async function getMapsByCreatorID(creatorID) {
+    try {
+        const url = mapAPI + `getMaps/${creatorID}`;
+        const options = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        const response = await fetch(url, options);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw new Error('Failed to fetch data from the API');
+    }
+}
+
+async function deleteMap(id) {
+    try {
+        const url = mapAPI + `delete/${id}`;
+        const options = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        const response = await fetch(url, options);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw new Error('Failed to fetch data from the API');
+    }
+}
+export default {signUp, login, reset, deleteUser, addBlog, retrieveUser, getBlogByUser, deleteBlog, likeBlog, saveMap, getMapById,
+    getMapsByCreatorID, deleteMap};
 
 

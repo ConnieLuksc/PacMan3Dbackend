@@ -37,3 +37,20 @@
 4. likeBlog(blogId)
 <br>Input: blogId (string)
 <br>Output: isLiked
+
+## Map
+1. saveMap(id, creatorID, name, mapSize, mapCells)
+<br>Input: id (string), creatorID (string), name (string), mapSize (string), mapCells (array of objects with properties: type (number), objName (string), direction (number))
+<br>Output: isSaved
+
+2. getMapById(id)
+<br>Input: id (string)
+<br>Output: {id, creatorID, name, mapSize, mapCells, createdAt}
+
+3. getMapsByCreatorID(creatorID)
+<br>Input: creatorID (string)
+<br>Output: [{id, creatorID, name, mapSize, mapCells, createdAt}]
+
+4. deleteMap(id)
+<br>Input: id (string)
+<br>Output: isDeleted

@@ -25,11 +25,18 @@ const GameSchema = new Schema({
 });
 
 const MapSchema = new Schema({
-    creatorId: { type: String, required: true }, // User ID of the map creator
-    mapSize: { type: Number, required: true }, // Size of the game map
-    mapComponents: { type: String }, // Map components data
-    createdAt: { type: Date, default: Date.now } // Timestamp of map creation
-});
+    id: { type: String, required: true },
+    creatorID: { type: String, required: true },
+    name: { type: String, required: true },
+    mapSize: { type: String, required: true },
+    mapCells: [{
+      type: { type: Number, required: true },
+      objName: { type: String },
+      direction: { type: Number }
+    }],
+    createdAt: { type: Date, default: Date.now }
+  });
+  
 
 const Map = model('Map', MapSchema);
 const User = model('User', UserSchema);
