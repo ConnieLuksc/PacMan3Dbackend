@@ -14,6 +14,12 @@ BlogRouter.post("/add", async (req, res) => {
     }
 });
 
+// GET /api/blog - get all blogs
+BlogRouter.get("/", async (req, res) => {
+    const blogs = await db.collection("blogs").find().toArray();
+    res.status(200).json(blogs);
+  });
+
 BlogRouter.get("/:creatorId", async (req, res) => {
     const creatorId = req.params.creatorId;
     const result = await db.collection("blogs").find({"creatorId": creatorId}).toArray()
