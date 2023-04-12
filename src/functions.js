@@ -100,13 +100,13 @@ async function deleteUser(username) {
         }
     }
 
-async function addBlog(title, content, creatorId) {
+async function addBlog(title, content, username) {
     try {
         const url = blogAPI + "add";
         const body = {
             title: title,
             content: content,
-            creatorId: creatorId,
+            username: username,
         };
         const options = {
             method: 'POST', // HTTP method: GET, POST, PUT, DELETE, etc.

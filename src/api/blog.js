@@ -5,8 +5,8 @@ const BlogRouter = new Router();
 import db from "../mongodb_connection.js"
 
 BlogRouter.post("/add", async (req, res) => {
-    const { title, content, creatorId } = req.body;
-    const result = await db.collection("blogs").insertOne({ title: title, content: content, creatorId: creatorId,  numberOfLikes: 0, createdAt: new Date() });
+    const { blog_title, blog_content, user} = req.body;
+    const result = await db.collection("blogs").insertOne({ title: blog_title, content: blog_content, creatorId: user,  numberOfLikes: 0, createdAt: new Date() });
     if (result) {
         res.send({ isAdded: true, message: "Blog added successfully" });
     } else {

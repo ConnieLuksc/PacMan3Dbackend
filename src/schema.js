@@ -12,7 +12,7 @@ const UserSchema = new Schema({
 const BlogSchema = new Schema({
     title: { type: String, required: true }, // Title of the blog
     content: { type: String, required: true }, // Content of the blog
-    creatorId: { type: String, required: true }, // User ID of the blog creator
+    creatorId: { type: String, required: true }, // User name of the blog creator
     createdAt: { type: Date, default: Date.now }, // Timestamp of blog creation
     numberOfLikes: { type: Number, default: 0 } // Number of likes for the blog, default is 0
 });
