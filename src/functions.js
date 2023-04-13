@@ -245,7 +245,45 @@ async function deleteMap(id) {
         throw new Error('Failed to fetch data from the API');
     }
 }
+
+async function saveTran(en, ch, jp) {
+    try {
+      const url = tranAPI + "save";
+      const body = {
+        tran: {
+          en: en,
+          ch: ch,
+          jp: jp
+        }
+      };
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      };
+      const response = await fetch(url, options);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw new Error('Failed to fetch data from the API');
+    }
+  }
+
+  async function getTran(id) {
+    try {
+      const url = tranAPI + `get?id=${id}`;
+      const options = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      const response = await fetch(url, options);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw new Error('Failed to fetch data from the API');
+    }
+  }
 export default {signUp, login, reset, deleteUser, addBlog, retrieveUser, getBlogByUser, deleteBlog, likeBlog, saveMap, getMapById,
-    getMapsByCreatorID, deleteMap};
+    getMapsByCreatorID, deleteMap, saveTran, getTran};
 
 

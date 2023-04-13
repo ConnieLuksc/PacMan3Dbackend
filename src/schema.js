@@ -36,12 +36,21 @@ const MapSchema = new Schema({
     }],
     createdAt: { type: Date, default: Date.now }
   });
+
+const TranslationSchema = new Schema({
+  tran:[{
+    en: {type: String, required: true},
+    ch: {type: String, required: true},
+    jp: {type: String, required: true}
+  }]
+})
   
 
 const Map = model('Map', MapSchema);
 const User = model('User', UserSchema);
 const Game = model('Game', GameSchema);
 const Blog = model('Blog', BlogSchema);
+const Translation = model('Translation', TranslationSchema);
 
-export default {Map, User, Game, Blog}
+export default {Map, User, Game, Blog, Translation}
 
